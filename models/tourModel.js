@@ -73,7 +73,6 @@ const tourSchema = mongoose.Schema(
     images: [String],
     createdAt: {
       type: Date,
-      default: Date.now(),
       select: false,
     },
     startDates: [Date],
@@ -94,6 +93,7 @@ tourSchema.virtual("durationWeeks").get(function () {
 
 tourSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
+  this.createdAt = Date.now();
   next();
 });
 
