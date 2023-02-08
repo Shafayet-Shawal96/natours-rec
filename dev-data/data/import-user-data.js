@@ -2,7 +2,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
-const Tour = require("./../../models/tourModel");
+const User = require("./../../models/userModel");
 
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
@@ -15,11 +15,11 @@ mongoose.connect(DB).then(() => {
   console.log("DB connection successful");
 });
 
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, "utf-8"));
+const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 
 const importData = async () => {
   try {
-    await Tour.create(tours);
+    await User.create(users);
     console.log("Data successfully loaded");
   } catch (err) {
     console.log(err);
@@ -29,7 +29,7 @@ const importData = async () => {
 
 const deleteData = async () => {
   try {
-    await Tour.deleteMany();
+    await User.deleteMany();
     console.log("Data successfully deleted");
   } catch (err) {
     console.log(err);

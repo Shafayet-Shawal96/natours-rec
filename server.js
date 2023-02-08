@@ -1,3 +1,5 @@
+// detailed Console log is for development
+require("./utils/detailedConsolelog");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
