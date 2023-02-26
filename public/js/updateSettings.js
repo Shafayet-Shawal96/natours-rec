@@ -17,7 +17,7 @@ export const updateSettings = async (data, type) => {
       data,
     });
 
-    if (res.data.status === "success") {
+    if (type === "password" && res.data.status === "success") {
       document.cookie = `jwt=${res.data.token};expires=${new Date(
         Date.now() + 86400 * 1000
       ).toUTCString()};path=/;`;

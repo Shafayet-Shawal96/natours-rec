@@ -12114,7 +12114,7 @@ var updateSettings = /*#__PURE__*/function () {
           });
         case 4:
           res = _context.sent;
-          if (res.data.status === "success") {
+          if (type === "password" && res.data.status === "success") {
             document.cookie = "jwt=".concat(res.data.token, ";expires=").concat(new Date(Date.now() + 86400 * 1000).toUTCString(), ";path=/;");
             (0, _alerts.showAlert)("success", "".concat(type.toUpperCase(), " updated successfully!"));
           }
@@ -12293,12 +12293,11 @@ if (logOutBtn) {
 }
 if (userDataForm) userDataForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  var name = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
-  (0, _updateSettings.updateSettings)({
-    name: name,
-    email: email
-  }, "data");
+  var form = new FormData();
+  form.append("name", document.getElementById("name").value);
+  form.append("email", document.getElementById("email").value);
+  form.append("photo", document.getElementById("photo").files[0]);
+  (0, _updateSettings.updateSettings)(form, "data");
 });
 if (userPasswordForm) userPasswordForm.addEventListener("submit", /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
